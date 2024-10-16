@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ejercicio6interfaces;
-
 /**
  *
  * @author Jhony
@@ -63,6 +62,26 @@ public class Hijo {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String [] toArrayString(){
+        String[] s = new String[5];
+        s[0] = this.nombre;
+        s[1] = this.Apellidos;
+        s[2] = this.deporte;
+        s[3] = this.nivel;
+        s[4] = this.fechaNacimiento;
+        return s;
+    }
+
+    
+    
+
+    
+
+    
+
+    
+    
     
     
     

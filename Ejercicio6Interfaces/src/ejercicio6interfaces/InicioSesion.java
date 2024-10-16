@@ -10,6 +10,9 @@ package ejercicio6interfaces;
  */
 public class InicioSesion extends javax.swing.JFrame {
 
+    private String usuario = "usuario";
+    private String password = "usuario";
+    
     /**
      * Creates new form InicioSesion
      */
@@ -30,7 +33,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
-        jPasswordFieldContraseña = new javax.swing.JPasswordField();
+        jPasswordFieldPassword = new javax.swing.JPasswordField();
         jButtonAcceder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,7 +49,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
         jTextFieldUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jPasswordFieldContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPasswordFieldPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButtonAcceder.setText("Acceder");
         jButtonAcceder.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +75,7 @@ public class InicioSesion extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldUsuario)
-                            .addComponent(jPasswordFieldContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)))
+                            .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(199, 199, 199)
                         .addComponent(jButtonAcceder)))
@@ -90,7 +93,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordFieldContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addComponent(jButtonAcceder)
                 .addGap(43, 43, 43))
@@ -100,8 +103,17 @@ public class InicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccederActionPerformed
-        RegistroDeportivo registro = new RegistroDeportivo(this, true);
-        registro.setVisible(true);
+        String usuario = jTextFieldUsuario.getText();
+        String password = new String(jPasswordFieldPassword.getPassword());
+        
+        //if (usuario.equals(usuario)) {
+            //if (password.equals(password)) {
+                RegistroDeportivos registro = new RegistroDeportivos();
+                registro.setVisible(true);
+                this.dispose();
+            //}
+        //}
+     
     }//GEN-LAST:event_jButtonAccederActionPerformed
 
     /**
@@ -139,12 +151,13 @@ public class InicioSesion extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAcceder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordFieldContraseña;
+    private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }
