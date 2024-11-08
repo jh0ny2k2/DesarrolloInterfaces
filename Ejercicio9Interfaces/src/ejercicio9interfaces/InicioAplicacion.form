@@ -43,7 +43,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jTextFieldOriginal" max="32767" attributes="0"/>
                           <Component id="jComboBoxOriginal" max="32767" attributes="0"/>
-                          <Component id="jlogin" min="-2" pref="181" max="-2" attributes="0"/>
+                          <Component id="jspinner" min="-2" pref="181" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -100,7 +100,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jRadioButtonOpcion3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jCheckBoxOpcion6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jspinner" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="12" max="-2" attributes="0"/>
@@ -209,7 +209,10 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jlogin">
+    <Component class="javax.swing.JSpinner" name="jspinner">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jspinnerStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>

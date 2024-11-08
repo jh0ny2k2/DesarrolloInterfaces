@@ -49,8 +49,6 @@ public class Ejer1 extends javax.swing.JFrame {
             }
         });
 
-        jLabelResultado.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +81,7 @@ public class Ejer1 extends javax.swing.JFrame {
                     .addComponent(jButtonRestar))
                 .addGap(35, 35, 35)
                 .addComponent(jLabelResultado)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();

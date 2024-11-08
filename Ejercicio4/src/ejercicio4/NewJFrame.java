@@ -145,33 +145,33 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPrimerNombreActionPerformed
 
+    private void jButtonMezclarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMezclarActionPerformed
+
+        String nombre1 = jTextFieldPrimerNombre.getText();
+        String nombre2 = jTextFieldSegundoNombre.getText();
+
+        jTextFieldPrimerNombre.setEnabled(false);
+        jTextFieldSegundoNombre.setEnabled(false);
+
+        jButtonReiniciar.setEnabled(true);
+        jButtonMezclar.setEnabled(false);
+
+        String[] nombres = mezclarNombres(nombre1, nombre2);
+        String resultado = String.join(" - ", nombres);
+
+        jLabelResultado.setText(resultado);
+    }//GEN-LAST:event_jButtonMezclarActionPerformed
+
     private void jButtonReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReiniciarActionPerformed
         jTextFieldPrimerNombre.setText("");
         jTextFieldSegundoNombre.setText("");
         jLabelResultado.setText("");
-        
+
         jTextFieldPrimerNombre.setEnabled(true);
         jTextFieldSegundoNombre.setEnabled(true);
-        
+
         jButtonReiniciar.setEnabled(true);
     }//GEN-LAST:event_jButtonReiniciarActionPerformed
-
-    private void jButtonMezclarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMezclarActionPerformed
-        
-        String nombre1 = jTextFieldPrimerNombre.getText();
-        String nombre2 = jTextFieldSegundoNombre.getText();
-        
-        jTextFieldPrimerNombre.setEnabled(false);
-        jTextFieldSegundoNombre.setEnabled(false);
-        
-        jButtonReiniciar.setEnabled(true);
-        jButtonMezclar.setEnabled(false);
-        
-        String[] nombres = mezclarNombres(nombre1, nombre2);
-        String resultado = String.join(" - ", nombres);
-        
-        jLabelResultado.setText(resultado);
-    }//GEN-LAST:event_jButtonMezclarActionPerformed
 
     
     public String[] mezclarNombres(String nombre1, String nombre2){

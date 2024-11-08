@@ -15,6 +15,8 @@ public class RegistroDeportivos extends javax.swing.JFrame {
     /**
      * Creates new form RegistroDeportivos
      */
+    
+    private boolean isTableVisible = true;
     public RegistroDeportivos() {
         initComponents();
         inicializarTabla();
@@ -259,11 +261,14 @@ public class RegistroDeportivos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMatricularActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jScrollPane1.isVisible()) {
-            jScrollPane1.setVisible(false);
+        if (isTableVisible) {
+            jScrollPane2.setVisible(false);
         } else {
-            jScrollPane1.setVisible(true);
+            jScrollPane2.setVisible(true);
         }
+        isTableVisible = !isTableVisible;
+        revalidate();
+        repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -38,7 +38,7 @@ public class InicioAplicacion extends javax.swing.JFrame {
         jCheckBoxOpcion6 = new javax.swing.JCheckBox();
         jTextFieldOriginal = new javax.swing.JTextField();
         jComboBoxOriginal = new javax.swing.JComboBox<>();
-        jlogin = new javax.swing.JSpinner();
+        jspinner = new javax.swing.JSpinner();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jRadioButtonEspejoOpcion1 = new javax.swing.JRadioButton();
@@ -111,6 +111,12 @@ public class InicioAplicacion extends javax.swing.JFrame {
             }
         });
 
+        jspinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jspinnerStateChanged(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Espejo");
 
@@ -166,7 +172,7 @@ public class InicioAplicacion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldOriginal)
                             .addComponent(jComboBoxOriginal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jspinner, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel1))
@@ -210,7 +216,7 @@ public class InicioAplicacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonOpcion3)
                     .addComponent(jCheckBoxOpcion6)
-                    .addComponent(jlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -306,6 +312,12 @@ public class InicioAplicacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBoxOpcion6ActionPerformed
 
+    private void jspinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspinnerStateChanged
+        Object value = jspinner.getValue();
+        
+        jSpinnerEspiner.setValue(value);
+    }//GEN-LAST:event_jspinnerStateChanged
+
     
     
     /**
@@ -342,6 +354,6 @@ public class InicioAplicacion extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinnerEspiner;
     private javax.swing.JTextField jTextFieldEspejo;
     private javax.swing.JTextField jTextFieldOriginal;
-    private javax.swing.JSpinner jlogin;
+    private javax.swing.JSpinner jspinner;
     // End of variables declaration//GEN-END:variables
 }
