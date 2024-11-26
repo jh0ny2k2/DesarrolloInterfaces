@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Logica {
     private ArrayList<Socio> socios = new ArrayList<>();
-    private ArrayList<Deporte> deportes = new ArrayList<>();
+   
     private ArrayList<SocioDeporte> socioDeportes = new ArrayList<>();
 
     // Métodos para CRUD de socios

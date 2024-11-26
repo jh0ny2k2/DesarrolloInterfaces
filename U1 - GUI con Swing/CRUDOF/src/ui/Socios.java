@@ -63,6 +63,11 @@ public class Socios extends javax.swing.JFrame {
         jLabel4.setText("Orden");
 
         jButtonDeportes.setText("Gestionar Deportes");
+        jButtonDeportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeportesActionPerformed(evt);
+            }
+        });
 
         jComboBoxCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -183,6 +188,11 @@ public class Socios extends javax.swing.JFrame {
         
         socio.setVisible(true);
     }//GEN-LAST:event_jButtonAddSocioActionPerformed
+
+    private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
+        Deportes deportes = new Deportes();
+        deportes.setVisible(true);
+    }//GEN-LAST:event_jButtonDeportesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,7 +4,9 @@
  */
 package ui;
 
+import datos.Deporte;
 import datos.Socio;
+import gui.tablemodels.ModeloTableDeportes;
 import gui.tablemodels.ModeloTableSocios;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +15,16 @@ import java.util.List;
  *
  * @author Jh0ny2k2
  */
-public class Socios extends javax.swing.JFrame {
+public class Deportes extends javax.swing.JFrame {
     
-    private logica.Logica logicaSocio;
+    private ArrayList<Deporte> deportes = new ArrayList<>();
     /**
      * Creates new form Socios
      */
-    public Socios() {
+    public Deportes() {
         initComponents();
+        inicializarTabla();
+        setModeloTabla();
     }
 
     /**
@@ -34,52 +38,41 @@ public class Socios extends javax.swing.JFrame {
 
         jButtonModificarSocio = new javax.swing.JButton();
         jButtonDeleteSocio = new javax.swing.JButton();
-        jTextFieldFiltro = new javax.swing.JTextField();
-        jButtonOrdenar = new javax.swing.JButton();
-        jButtonFiltrar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButtonDeportes = new javax.swing.JButton();
-        jComboBoxCampo = new javax.swing.JComboBox<>();
-        jComboBoxOrden = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableSocios = new javax.swing.JTable();
+        jTableDeportes = new javax.swing.JTable();
         jButtonAddSocio = new javax.swing.JButton();
+        jButtonModificarSocio1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonModificarSocio.setText("Modificar");
+        jButtonModificarSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarSocioActionPerformed(evt);
+            }
+        });
 
         jButtonDeleteSocio.setText("Borrar");
-
-        jButtonOrdenar.setText("Ordenar");
-
-        jButtonFiltrar.setText("Filtrar");
-
-        jLabel3.setText("Campo:");
-
-        jLabel4.setText("Orden");
-
-        jButtonDeportes.setText("Gestionar Deportes");
-
-        jComboBoxCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBoxOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jButtonDeleteSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteSocioActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 3, 48)); // NOI18N
-        jLabel1.setText("Socios");
+        jLabel1.setText("Deportes");
 
-        jTableSocios.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDeportes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cod.", "Nombre", "Edad", "Cuota", "Nº Deportes"
+                "Cod.", "Descripción", "Niveles"
             }
         ));
-        jScrollPane1.setViewportView(jTableSocios);
+        jScrollPane1.setViewportView(jTableDeportes);
 
         jButtonAddSocio.setText("Añadir");
         jButtonAddSocio.addActionListener(new java.awt.event.ActionListener() {
@@ -88,47 +81,35 @@ public class Socios extends javax.swing.JFrame {
             }
         });
 
+        jButtonModificarSocio1.setText("Gestionar Socios");
+        jButtonModificarSocio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarSocio1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(341, 341, 341)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAddSocio)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonModificarSocio)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonDeleteSocio)
-                                .addGap(444, 444, 444)
-                                .addComponent(jButtonDeportes))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonFiltrar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonOrdenar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel3)
-                                        .addGap(65, 65, 65)
-                                        .addComponent(jLabel4)
-                                        .addGap(27, 27, 27))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jComboBoxCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(jComboBoxOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jSeparator1))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(jButtonAddSocio)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificarSocio)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDeleteSocio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonModificarSocio1))
+                    .addComponent(jSeparator1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(338, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(224, 224, 224))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,48 +123,68 @@ public class Socios extends javax.swing.JFrame {
                     .addComponent(jButtonAddSocio)
                     .addComponent(jButtonModificarSocio)
                     .addComponent(jButtonDeleteSocio)
-                    .addComponent(jButtonDeportes))
+                    .addComponent(jButtonModificarSocio1))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBoxCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonFiltrar)
-                        .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonOrdenar)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void addSocio(Socio s) {
-        logicaSocio.agregarSocio(s); 
-        ModeloTableSocios tabla = new ModeloTableSocios(logicaSocio.obtenerSocios());
-        jTableSocios.setModel(tabla); 
-        tabla.fireTableDataChanged();
+    public ArrayList<Deporte> obtenerDeportes() { 
+        return deportes;    
+    }
+    
+    public void addDeporte(Deporte d) {
+        deportes.add(d);
+        setModeloTabla(); 
     }
     
     private void setModeloTabla() {
-        ModeloTableSocios tabla = new ModeloTableSocios(logicaSocio.obtenerSocios());
-        
-        jTableSocios.setModel(tabla);
+        ModeloTableDeportes tablaDeportes = new ModeloTableDeportes(obtenerDeportes());
+        jTableDeportes.setModel(tablaDeportes);
+        tablaDeportes.fireTableDataChanged();
     }
     
     private void jButtonAddSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSocioActionPerformed
-        AddSocio socio = new AddSocio(this, true);
-        
-        socio.setVisible(true);
+        AddDeporte deporte = new AddDeporte(this, true, this);
+        deporte.setVisible(true);
     }//GEN-LAST:event_jButtonAddSocioActionPerformed
 
+    private void jButtonDeleteSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSocioActionPerformed
+        int fila = jTableDeportes.getSelectedRow();
+        
+        Deporte deporte = obtenerDeportes().get(fila);
+        
+        obtenerDeportes().remove(deporte);
+        
+        setModeloTabla();
+    }//GEN-LAST:event_jButtonDeleteSocioActionPerformed
+
+    private void jButtonModificarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocioActionPerformed
+        int fila = jTableDeportes.getSelectedRow();
+        
+        Deporte deporteSeleccionado = obtenerDeportes().get(fila);
+        
+        
+        
+        AddDeporte deporte = new AddDeporte(this, true, this);
+        deporte.setTextDeportes(deporteSeleccionado);
+        deporte.setVisible(true);
+    }//GEN-LAST:event_jButtonModificarSocioActionPerformed
+
+    private void jButtonModificarSocio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocio1ActionPerformed
+        Socios socios = new Socios();
+        socios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonModificarSocio1ActionPerformed
+
+    private void inicializarTabla() {
+        ModeloTableDeportes modelo = new ModeloTableDeportes(obtenerDeportes());
+        jTableDeportes.setModel(modelo);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -201,20 +202,21 @@ public class Socios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Socios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Deportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Socios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Deportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Socios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Deportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Socios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Deportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Socios().setVisible(true);
+                new Deportes().setVisible(true);
             }
         });
     }
@@ -222,18 +224,11 @@ public class Socios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddSocio;
     private javax.swing.JButton jButtonDeleteSocio;
-    private javax.swing.JButton jButtonDeportes;
-    private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JButton jButtonModificarSocio;
-    private javax.swing.JButton jButtonOrdenar;
-    private javax.swing.JComboBox<String> jComboBoxCampo;
-    private javax.swing.JComboBox<String> jComboBoxOrden;
+    private javax.swing.JButton jButtonModificarSocio1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTableSocios;
-    private javax.swing.JTextField jTextFieldFiltro;
+    private javax.swing.JTable jTableDeportes;
     // End of variables declaration//GEN-END:variables
 }
