@@ -4,12 +4,20 @@
  */
 package ui;
 
+import logicaNegocio.logicaNegocioSocio;
+
 /**
  *
  * @author Jh0ny2k2
  */
 public class Main extends javax.swing.JFrame {
-
+  
+    private logicaNegocioSocio logica = new logicaNegocioSocio();
+    
+    private Socios socios = new Socios(logica);
+    private Deportes deportes = new Deportes(logica);
+    
+   
     /**
      * Creates new form Main
      */
@@ -117,10 +125,18 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
-        Deportes deportes = new Deportes();
+    public void irSocios() {
+        socios.addVariosSocios();
+        socios.setVisible(true);
+    } 
+    
+    public void irDeportes() {
+        deportes.addVariosDeportes();
         deportes.setVisible(true);
-        this.dispose();
+    }
+    
+    private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
+        irDeportes();
     }//GEN-LAST:event_jButtonDeportesActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -128,9 +144,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jButtonSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSociosActionPerformed
-        Socios socios = new Socios();
-        socios.setVisible(true);
-        this.dispose();
+        irSocios();
     }//GEN-LAST:event_jButtonSociosActionPerformed
 
     /**

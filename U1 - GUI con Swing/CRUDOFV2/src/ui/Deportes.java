@@ -5,45 +5,52 @@
 package ui;
 
 import datos.Deporte;
-import datos.Socio;
-import gui.tablemodels.ModeloTableDeportes;
-import gui.tablemodels.ModeloTableSocios;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
-
+import gui.tablemodels.DeporteTableModel;
+import gui.tablemodels.SocioTableModel;
+import logicaNegocio.logicaNegocioSocio;
 /**
  *
- * @author Jh0ny2k2
+ * @author Jhony
  */
 public class Deportes extends javax.swing.JFrame {
-    
-    private LogicaApp logicaApp;
-    private ArrayList<Deporte> deportes = new ArrayList<>();
-    
-    public void addVariosDeportes () {
-        Deporte socio1 = new Deporte(1, "jhony", 22);
-        Deporte socio2 = new Deporte(1, "jhony", 22);
-        Deporte socio3 = new Deporte(1, "jhony", 22);
-        Deporte socio4 = new Deporte(1, "jhony", 22);
 
-        
-        logicaApp.addDeporte(socio4);
-        logicaApp.addDeporte(socio2);
-        logicaApp.addDeporte(socio1);
-        logicaApp.addDeporte(socio3);    
-    }
+    private logicaNegocioSocio logica;
     
     /**
-     * Creates new form Socios
+     * Creates new form Deportes
      */
-    public Deportes(LogicaApp logicaApp) {
+    public Deportes(logicaNegocioSocio logica) {
         initComponents();
-        this.logicaApp = logicaApp;
-        addVariosDeportes();
+        this.logica = logica;
+        setModeloTabla();
+    }
+    
+    public void setModeloTabla() {
+        DeporteTableModel tablaSocios = new DeporteTableModel(logica.getDeportes());
+        jTableDeportes.setModel(tablaSocios);
+        tablaSocios.fireTableDataChanged();
+    }
+    
+    public void addVariosDeportes () {
+        Deporte socio1 = new Deporte("1", "jhony", 22);
+        Deporte socio2 = new Deporte("2", "jhony", 22);
+        Deporte socio3 = new Deporte("3", "jhony", 22);
+        Deporte socio4 = new Deporte("4", "jhony", 22);
+
+        
+        logica.addDeporte(socio4);
+        logica.addDeporte(socio2);
+        logica.addDeporte(socio1);
+        logica.addDeporte(socio3);   
+        
         setModeloTabla();
     }
 
+    public void addSocio(Deporte d) {
+        logica.addDeporte(d);
+        setModeloTabla();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,16 +60,30 @@ public class Deportes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonAddSocio = new javax.swing.JButton();
+        jButtonModificarSocio1 = new javax.swing.JButton();
         jButtonModificarSocio = new javax.swing.JButton();
         jButtonDeleteSocio = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableDeportes = new javax.swing.JTable();
-        jButtonAddSocio = new javax.swing.JButton();
-        jButtonModificarSocio1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButtonAddSocio.setText("Añadir");
+        jButtonAddSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddSocioActionPerformed(evt);
+            }
+        });
+
+        jButtonModificarSocio1.setText("Gestionar Socios");
+        jButtonModificarSocio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarSocio1ActionPerformed(evt);
+            }
+        });
 
         jButtonModificarSocio.setText("Modificar");
         jButtonModificarSocio.addActionListener(new java.awt.event.ActionListener() {
@@ -91,20 +112,6 @@ public class Deportes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableDeportes);
 
-        jButtonAddSocio.setText("Añadir");
-        jButtonAddSocio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddSocioActionPerformed(evt);
-            }
-        });
-
-        jButtonModificarSocio1.setText("Gestionar Socios");
-        jButtonModificarSocio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModificarSocio1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +131,7 @@ public class Deportes extends javax.swing.JFrame {
                     .addComponent(jSeparator1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(338, Short.MAX_VALUE)
+                .addContainerGap(323, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(224, 224, 224))
         );
@@ -143,61 +150,47 @@ public class Deportes extends javax.swing.JFrame {
                     .addComponent(jButtonModificarSocio1))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void addDeporte(Deporte d) {
-        logicaApp.addDeporte(d);
-        setModeloTabla(); 
-    }
-    
-    private void setModeloTabla() {
-        ModeloTableDeportes tablaDeportes = new ModeloTableDeportes(logicaApp.obtenerDeportes());
-        jTableDeportes.setModel(tablaDeportes);
-        tablaDeportes.fireTableDataChanged();
-    }
-    
+
     private void jButtonAddSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSocioActionPerformed
         AddDeporte deporte = new AddDeporte(this, true);
         deporte.setModificar(false);
         deporte.setVisible(true);
     }//GEN-LAST:event_jButtonAddSocioActionPerformed
 
-    private void jButtonDeleteSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSocioActionPerformed
-        int fila = jTableDeportes.getSelectedRow();
-        
-        Deporte deporte = logicaApp.obtenerDeportes().get(fila);
-        
-        logicaApp.obtenerDeportes().remove(deporte);
-        
-        setModeloTabla();
-    }//GEN-LAST:event_jButtonDeleteSocioActionPerformed
+    private void jButtonModificarSocio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocio1ActionPerformed
+        Socios socios = new Socios(logica);
+        socios.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_jButtonModificarSocio1ActionPerformed
 
     private void jButtonModificarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocioActionPerformed
         int fila = jTableDeportes.getSelectedRow();
-    
+
         Deporte deporteSeleccionado = logicaApp.obtenerDeportes().get(fila);
 
         AddDeporte deporteDialog = new AddDeporte(this, true);
         deporteDialog.setModificar(true);
         deporteDialog.setTextDeportes(deporteSeleccionado);
         deporteDialog.setVisible(true);
-        
-        
-        
+
     }//GEN-LAST:event_jButtonModificarSocioActionPerformed
 
-    private void jButtonModificarSocio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocio1ActionPerformed
-        Socios socios = new Socios(logicaApp);
-        socios.setVisible(true);
-        
-        this.dispose();
-    }//GEN-LAST:event_jButtonModificarSocio1ActionPerformed
+    private void jButtonDeleteSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSocioActionPerformed
+        int fila = jTableDeportes.getSelectedRow();
 
-    
+        Deporte deporte = logicaApp.obtenerDeportes().get(fila);
+
+        logicaApp.obtenerDeportes().remove(deporte);
+
+        setModeloTabla();
+    }//GEN-LAST:event_jButtonDeleteSocioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddSocio;

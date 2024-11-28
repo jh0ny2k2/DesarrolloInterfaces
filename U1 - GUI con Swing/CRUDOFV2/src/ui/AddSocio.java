@@ -8,12 +8,12 @@ import datos.Socio;
 
 /**
  *
- * @author Jh0ny2k2
+ * @author Jhony
  */
 public class AddSocio extends javax.swing.JDialog {
 
-    private Socios parentFrame;
-    private boolean modificar = false;
+    private Socios socios;
+    private boolean modificar;
     private Socio SocioModificar;
     
     /**
@@ -21,12 +21,28 @@ public class AddSocio extends javax.swing.JDialog {
      */
     public AddSocio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.parentFrame = (Socios) parent;
         initComponents();
+        this.socios = (Socios) parent;
     }
     
     public void setModificar(boolean modificar) {
         this.modificar = modificar;
+    }
+    
+    public void setSocioModificar(Socio s) {
+        this.SocioModificar = s;
+        
+        if (s != null) {
+                jTextFieldCodigo.setText(s.getId());
+                jTextFieldNombre.setText(s.getNombre());
+                jTextFieldEdad.setText(String.valueOf(s.getEdad()));
+                jTextFieldCuota.setText(String.valueOf(s.getCuota()));
+        } else {
+                jTextFieldCodigo.setText("");
+                jTextFieldNombre.setText("");
+                jTextFieldEdad.setText("");
+                jTextFieldCuota.setText("");
+        }
     }
 
     /**
@@ -38,13 +54,14 @@ public class AddSocio extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButtonGuardarSocio2 = new javax.swing.JButton();
         jTextFieldCodigo = new javax.swing.JTextField();
+        jButtonCancelar = new javax.swing.JButton();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldCuota = new javax.swing.JTextField();
         jTextFieldEdad = new javax.swing.JTextField();
@@ -54,11 +71,6 @@ public class AddSocio extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jButtonAdd = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
-        jButtonGuardarSocio = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
-
-        jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 3, 48)); // NOI18N
-        jLabel1.setText("Socios");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,9 +89,23 @@ public class AddSocio extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Cuota:");
 
+        jButtonGuardarSocio2.setText("Guardar");
+        jButtonGuardarSocio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarSocio2ActionPerformed(evt);
+            }
+        });
+
         jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCodigoActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -153,26 +179,12 @@ public class AddSocio extends javax.swing.JDialog {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jButtonGuardarSocio.setText("Guardar");
-        jButtonGuardarSocio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGuardarSocioActionPerformed(evt);
-            }
-        });
-
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +213,7 @@ public class AddSocio extends javax.swing.JDialog {
                                     .addComponent(jTextFieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(jButtonGuardarSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonGuardarSocio2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -234,17 +246,43 @@ public class AddSocio extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGuardarSocio)
+                    .addComponent(jButtonGuardarSocio2)
                     .addComponent(jButtonCancelar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonGuardarSocio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarSocio2ActionPerformed
+        String codigo = jTextFieldCodigo.getText();
+        String nombre = jTextFieldNombre.getText();
+        int edad = Integer.parseInt(jTextFieldEdad.getText());
+        int cuota = Integer.parseInt(jTextFieldCuota.getText());
+
+        if (modificar) {
+            if (SocioModificar != null) {
+                SocioModificar.setId(codigo);
+                SocioModificar.setNombre(nombre);
+                SocioModificar.setEdad(edad);
+                SocioModificar.setCuota(cuota);
+            }
+        } else {
+            Socio socio = new Socio(codigo, nombre, edad, cuota, 0);
+            socios.addSocio(socio);
+        }
+            
+        dispose();
+
+    }//GEN-LAST:event_jButtonGuardarSocio2ActionPerformed
+
     private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCodigoActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
         // TODO add your handling code here:
@@ -258,47 +296,46 @@ public class AddSocio extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldEdadActionPerformed
 
-    private void jButtonGuardarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarSocioActionPerformed
-        int codigo = Integer.parseInt(jTextFieldCodigo.getText());
-        String nombre = jTextFieldNombre.getText();
-        int edad = Integer.parseInt(jTextFieldEdad.getText());
-        int cuota = Integer.parseInt(jTextFieldCuota.getText());
-        
-        if (modificar) {
-            if (SocioModificar != null) {
-                SocioModificar.setCodigo(codigo);
-                SocioModificar.setNombre(nombre);
-                SocioModificar.setEdad(edad);
-                SocioModificar.setCuota(cuota);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
-        } else {
-            Socio socio = new Socio(codigo, nombre, edad, cuota);
-            parentFrame.addSocio(socio);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddSocio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-        dispose();
-        
-    }//GEN-LAST:event_jButtonGuardarSocioActionPerformed
+        //</editor-fold>
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    
-    public void setSocioModificar(Socio s) {
-        this.SocioModificar = s;
-        
-        if (s != null) {
-                jTextFieldCodigo.setText(String.valueOf(s.getCodigo()));
-                jTextFieldNombre.setText(s.getNombre());
-                jTextFieldEdad.setText(String.valueOf(s.getEdad()));
-                jTextFieldCuota.setText(String.valueOf(s.getCuota()));
-        } else {
-                jTextFieldCodigo.setText("");
-                jTextFieldNombre.setText("");
-                jTextFieldEdad.setText("");
-                jTextFieldCuota.setText("");
-        }
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AddSocio dialog = new AddSocio(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -306,7 +343,8 @@ public class AddSocio extends javax.swing.JDialog {
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardarSocio;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonGuardarSocio1;
+    private javax.swing.JButton jButtonGuardarSocio2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

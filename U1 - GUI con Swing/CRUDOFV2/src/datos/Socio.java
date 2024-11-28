@@ -10,26 +10,26 @@ package datos;
  */
 public class Socio {
     
-    private int codigo;
+    private String id;
     private String nombre;
     private int edad;
     private int cuota;
     private int numDeportes;
 
-    public Socio(int codigo, String nombre, int edad, int cuota) {
-        this.codigo = codigo;
+    public Socio(String id, String nombre, int edad, int cuota, int numDeportes) {
+        this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.cuota = cuota;
-        this.numDeportes = 0;
+        this.numDeportes = numDeportes;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public String getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -63,11 +63,5 @@ public class Socio {
     public void setNumDeportes(int numDeportes) {
         this.numDeportes = numDeportes;
     }
-    
-    
-
-    
-    
-    
     
 }

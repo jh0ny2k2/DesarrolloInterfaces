@@ -5,43 +5,32 @@
 package ui;
 
 import datos.Socio;
-import gui.tablemodels.ModeloTableSocios;
+import gui.tablemodels.SocioTableModel;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import javax.swing.JOptionPane;
+import logicaNegocio.logicaNegocioSocio;
 
 /**
  *
- * @author Jh0ny2k2
+ * @author Jhony
  */
 public class Socios extends javax.swing.JFrame {
-    private LogicaApp logicaApp;
-    
-    private ArrayList<Socio> socios = new ArrayList<>();
+
+    private logicaNegocioSocio logica;
     
     /**
      * Creates new form Socios
      */
-    public Socios(LogicaApp logica) {
+    public Socios(logicaNegocioSocio logica) {
         initComponents();
+        this.logica = logica;
         setModeloTabla();
-        addVariosSocios();
-        this.logicaApp = logica;
         jComboBoxOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Edad", "Cuota" }));
     }
+    
+    
 
-    public void addVariosSocios () {
-        Socio socio1 = new Socio(1, "jhony", 22, 1200);
-        Socio socio2 = new Socio(2, "pepe", 22, 1500);
-        Socio socio3 = new Socio(3, "juan", 22, 2100);
-        Socio socio4 = new Socio(4, "eva", 22, 1221);
-        
-        socios.add(socio4);
-        socios.add(socio2);
-        socios.add(socio1);
-        socios.add(socio3);    
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,8 +40,11 @@ public class Socios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableSocios = new javax.swing.JTable();
         jButtonModificarSocio = new javax.swing.JButton();
         jButtonDeleteSocio = new javax.swing.JButton();
+        jButtonAddSocio = new javax.swing.JButton();
         jTextFieldFiltro = new javax.swing.JTextField();
         jButtonOrdenar = new javax.swing.JButton();
         jButtonFiltrar = new javax.swing.JButton();
@@ -61,11 +53,18 @@ public class Socios extends javax.swing.JFrame {
         jComboBoxOrden = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableSocios = new javax.swing.JTable();
-        jButtonAddSocio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableSocios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cod.", "Nombre", "Edad", "Cuota", "Nº Deportes"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableSocios);
 
         jButtonModificarSocio.setText("Modificar");
         jButtonModificarSocio.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +77,13 @@ public class Socios extends javax.swing.JFrame {
         jButtonDeleteSocio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeleteSocioActionPerformed(evt);
+            }
+        });
+
+        jButtonAddSocio.setText("Añadir");
+        jButtonAddSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddSocioActionPerformed(evt);
             }
         });
 
@@ -108,23 +114,6 @@ public class Socios extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 3, 48)); // NOI18N
         jLabel1.setText("Socios");
-
-        jTableSocios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cod.", "Nombre", "Edad", "Cuota", "Nº Deportes"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableSocios);
-
-        jButtonAddSocio.setText("Añadir");
-        jButtonAddSocio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddSocioActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,7 +151,7 @@ public class Socios extends javax.swing.JFrame {
                                         .addComponent(jComboBoxOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12))))
                             .addComponent(jSeparator1))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +168,7 @@ public class Socios extends javax.swing.JFrame {
                     .addComponent(jButtonDeportes))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -187,51 +176,48 @@ public class Socios extends javax.swing.JFrame {
                     .addComponent(jButtonOrdenar)
                     .addComponent(jButtonFiltrar)
                     .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public ArrayList<Socio> obtenerSocios() {
-        return socios;
-    }
-    
-    public void addSocio(Socio s) {
-        socios.add(s);
-        setModeloTabla();
-    }
-    
-    private void setModeloTabla() {
-        ModeloTableSocios tablaSocios = new ModeloTableSocios(obtenerSocios());
+    public void setModeloTabla() {
+        SocioTableModel tablaSocios = new SocioTableModel(logica.getSocios());
         jTableSocios.setModel(tablaSocios);
         tablaSocios.fireTableDataChanged();
     }
-        
-
     
-    private void jButtonAddSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSocioActionPerformed
-        AddSocio socio = new AddSocio(this, true);
-        socio.setModificar(false);
-        socio.setVisible(true);
-    }//GEN-LAST:event_jButtonAddSocioActionPerformed
-
-    private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
-        Deportes deportes = new Deportes(logicaApp);
-        deportes.setVisible(true);
+    public void addVariosSocios () {
+        Socio socio1 = new Socio("1", "jhony", 22, 1200,3);
+        Socio socio2 = new Socio("2", "pepe", 22, 1500,2);
+        Socio socio3 = new Socio("3", "juan", 22, 2100,4);
+        Socio socio4 = new Socio("4", "eva", 22, 1221,1);
         
-        this.dispose();
-    }//GEN-LAST:event_jButtonDeportesActionPerformed
-
+        logica.addSocio(socio4);
+        logica.addSocio(socio2);
+        logica.addSocio(socio1);
+        logica.addSocio(socio3);    
+    }
+    
+    public void addSocio(Socio s) {
+        logica.addSocio(s);
+        setModeloTabla();
+    }
+    
+    public void iniciarTablaDeportes() {
+        setModeloTabla();
+    }
+    
     private void jButtonModificarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocioActionPerformed
         int selectedRow = jTableSocios.getSelectedRow();
-    
-        if (selectedRow != -1) { 
-            Socio socio = socios.get(selectedRow); 
+
+        if (selectedRow != -1) {
+            Socio socio = logica.getSocios().get(selectedRow);
 
             AddSocio addSocioDialog = new AddSocio(this, true);
             addSocioDialog.setModificar(true);
-            addSocioDialog.setSocioModificar(socio); 
+            addSocioDialog.setSocioModificar(socio);
             addSocioDialog.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, selecciona un socio para modificar.");
@@ -240,32 +226,27 @@ public class Socios extends javax.swing.JFrame {
 
     private void jButtonDeleteSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSocioActionPerformed
         int selectedRow = jTableSocios.getSelectedRow();
+
+        if (selectedRow != -1) {
+            Socio socio = logica.getSocios().get(selectedRow);
+            logica.getSocios().remove(socio);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un socio para eliminar.");
+        }
         
-        Socio socio = obtenerSocios().get(selectedRow);
-        obtenerSocios().remove(socio);
-        
+
         setModeloTabla();
     }//GEN-LAST:event_jButtonDeleteSocioActionPerformed
 
-    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
-        String texto = jTextFieldFiltro.getText();
-        
-        ArrayList<Socio> sociosFiltrados = new ArrayList<>();
-
-        for (Socio socio : socios) {
-            if (socio.getNombre().toLowerCase().contains(texto)) {
-                sociosFiltrados.add(socio);
-            }
-        }
-
-        ModeloTableSocios tablaSocios = new ModeloTableSocios(sociosFiltrados);
-        jTableSocios.setModel(tablaSocios);
-        tablaSocios.fireTableDataChanged();
-    }//GEN-LAST:event_jButtonFiltrarActionPerformed
+    private void jButtonAddSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSocioActionPerformed
+        AddSocio socio = new AddSocio(this, true);
+        socio.setModificar(false);
+        socio.setVisible(true);
+    }//GEN-LAST:event_jButtonAddSocioActionPerformed
 
     private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
         String criterio = (String) jComboBoxOrden.getSelectedItem();
-        ArrayList<Socio> sociosOrdenados = new ArrayList<>(socios);
+        ArrayList<Socio> sociosOrdenados = new ArrayList<>(logica.getSocios());
 
         switch (criterio) {
             case "Nombre":
@@ -278,13 +259,38 @@ public class Socios extends javax.swing.JFrame {
                 sociosOrdenados.sort(Comparator.comparingInt(Socio::getCuota));
                 break;
             default:
-                break;
+            break;
         }
 
-        ModeloTableSocios tablaSocios = new ModeloTableSocios(sociosOrdenados);
+        SocioTableModel tablaSocios = new SocioTableModel(sociosOrdenados);
         jTableSocios.setModel(tablaSocios);
         tablaSocios.fireTableDataChanged();
     }//GEN-LAST:event_jButtonOrdenarActionPerformed
+
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+        ArrayList<Socio> socios = logica.getSocios();
+        
+        String texto = jTextFieldFiltro.getText();
+        
+        ArrayList<Socio> sociosFiltrados = new ArrayList<>();
+
+        for (Socio socio : socios) {
+            if (socio.getNombre().toLowerCase().contains(texto)) {
+                sociosFiltrados.add(socio);
+            }
+        }
+
+        SocioTableModel tablaSocios = new SocioTableModel(sociosFiltrados);
+        jTableSocios.setModel(tablaSocios);
+        tablaSocios.fireTableDataChanged();
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
+
+    private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
+        Deportes deportes = new Deportes(logica);
+        deportes.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_jButtonDeportesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,30 +10,30 @@ package datos;
  */
 public class SocioDeporte {
     
-    private int codigoSocio;
-    private int codigoDeporte;
+    private String idSocio;
+    private String idDeporte;
     private int nivel;
 
-    public SocioDeporte(int codigoSocio, int codigoDeporte, int nivel) {
-        this.codigoSocio = codigoSocio;
-        this.codigoDeporte = codigoDeporte;
+    public SocioDeporte(String idSocio, String idDeporte, int nivel) {
+        this.idSocio = idSocio;
+        this.idDeporte = idDeporte;
         this.nivel = nivel;
     }
 
-    public int getCodigoSocio() {
-        return codigoSocio;
+    public String getIdSocio() {
+        return idSocio;
     }
 
-    public void setCodigoSocio(int codigoSocio) {
-        this.codigoSocio = codigoSocio;
+    public void setIdSocio(String idSocio) {
+        this.idSocio = idSocio;
     }
 
-    public int getCodigoDeporte() {
-        return codigoDeporte;
+    public String getIdDeporte() {
+        return idDeporte;
     }
 
-    public void setCodigoDeporte(int codigoDeporte) {
-        this.codigoDeporte = codigoDeporte;
+    public void setIdDeporte(String idDeporte) {
+        this.idDeporte = idDeporte;
     }
 
     public int getNivel() {
@@ -43,7 +43,5 @@ public class SocioDeporte {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    
-    
     
 }

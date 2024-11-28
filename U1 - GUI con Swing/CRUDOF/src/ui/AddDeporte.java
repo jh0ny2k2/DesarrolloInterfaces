@@ -13,15 +13,22 @@ import datos.Socio;
  */
 public class AddDeporte extends javax.swing.JDialog {
 
-    private Deportes deportes = new Deportes();
+    private LogicaApp logicaApp;
+    
+    private Deportes deportes = new Deportes(logicaApp);
+    public boolean modificar = false;
+    private Deporte deporteModificar;
     /**
      * Creates new form AddSocio
      */
-    public AddDeporte(java.awt.Frame parent, boolean modal, Deportes deportes) {
+    public AddDeporte(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.deportes = deportes;
     }
+    
+    public void setModificar(boolean modificar) {
+        this.modificar = modificar;
+    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,9 +46,9 @@ public class AddDeporte extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
         jTextFieldDescripcion = new javax.swing.JTextField();
-        jTextFieldNiveles = new javax.swing.JTextField();
         jButtonGuardarSocio = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jSpinnerNivcles = new javax.swing.JSpinner();
 
         jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 3, 48)); // NOI18N
         jLabel1.setText("Socios");
@@ -49,7 +56,7 @@ public class AddDeporte extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 3, 48)); // NOI18N
-        jLabel2.setText("Añadir Socios");
+        jLabel2.setText("Añadir Deportes");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Código: ");
@@ -72,12 +79,6 @@ public class AddDeporte extends javax.swing.JDialog {
             }
         });
 
-        jTextFieldNiveles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNivelesActionPerformed(evt);
-            }
-        });
-
         jButtonGuardarSocio.setText("Guardar");
         jButtonGuardarSocio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,10 +97,6 @@ public class AddDeporte extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(156, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(146, 146, 146))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -109,23 +106,26 @@ public class AddDeporte extends javax.swing.JDialog {
                             .addComponent(jLabel5)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNiveles, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                            .addComponent(jSpinnerNivcles)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(jButtonGuardarSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59)
-                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2)
-                .addGap(43, 43, 43)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,7 +136,7 @@ public class AddDeporte extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldNiveles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerNivcles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardarSocio)
@@ -155,19 +155,24 @@ public class AddDeporte extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDescripcionActionPerformed
 
-    private void jTextFieldNivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNivelesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNivelesActionPerformed
-
     private void jButtonGuardarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarSocioActionPerformed
         int codigo = Integer.parseInt(jTextFieldCodigo.getText());
         String descripcion = jTextFieldDescripcion.getText();
-        int niveles = Integer.parseInt(jTextFieldNiveles.getText());
-
-        Deporte deporte = new Deporte(codigo, descripcion, niveles);
-
-        deportes.addDeporte(deporte);
+        int niveles = (Integer) jSpinnerNivcles.getValue();
         
+        
+        if (modificar == true) {
+            if (deporteModificar != null) {
+                deporteModificar.setCodigo(codigo);
+                deporteModificar.setDescripcion(descripcion);
+                deporteModificar.setNiveles(niveles);
+            }
+        } else {
+            Deporte deporte = new Deporte(codigo, descripcion, niveles);
+            
+            logicaApp.addDeporte(deporte);
+        }
+
         dispose();
     }//GEN-LAST:event_jButtonGuardarSocioActionPerformed
 
@@ -177,59 +182,18 @@ public class AddDeporte extends javax.swing.JDialog {
 
     public void setTextDeportes(Deporte d) {
         
+        this.deporteModificar = d;
+        
         if (d != null) {
             jTextFieldCodigo.setText(String.valueOf(d.getCodigo()));
             jTextFieldDescripcion.setText(d.getDescripcion());
-            jTextFieldNiveles.setText(String.valueOf(d.getNiveles()));
+            jSpinnerNivcles.setValue(d.getNiveles());
         } else {
             // Si d es null, maneja el caso adecuado (por ejemplo, limpiar los campos)
-            jTextFieldCodigo.setText("n");
+            jTextFieldCodigo.setText("");
             jTextFieldDescripcion.setText("");
-            jTextFieldNiveles.setText("");
+            jSpinnerNivcles.setValue("");
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddDeporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddDeporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddDeporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddDeporte.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>1
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddDeporte dialog = new AddDeporte(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,8 +204,8 @@ public class AddDeporte extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JSpinner jSpinnerNivcles;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldDescripcion;
-    private javax.swing.JTextField jTextFieldNiveles;
     // End of variables declaration//GEN-END:variables
 }

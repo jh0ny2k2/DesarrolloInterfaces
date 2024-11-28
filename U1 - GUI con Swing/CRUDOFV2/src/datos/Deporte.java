@@ -10,21 +10,21 @@ package datos;
  */
 public class Deporte {
     
-    private int codigo;
+    private String codigo;
     private String descripcion;
     private int niveles;
 
-    public Deporte(int codigo, String descripcion, int niveles) {
+    public Deporte(String codigo, String descripcion, int niveles) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.niveles = niveles;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -43,7 +43,5 @@ public class Deporte {
     public void setNiveles(int niveles) {
         this.niveles = niveles;
     }
-    
-    
     
 }
