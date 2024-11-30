@@ -18,14 +18,17 @@ import logicaNegocio.logicaNegocioSocio;
 public class Socios extends javax.swing.JFrame {
 
     private logicaNegocioSocio logica;
+    private Main main;
     
     /**
      * Creates new form Socios
      */
-    public Socios(logicaNegocioSocio logica) {
+    public Socios(logicaNegocioSocio logica, Main main) {
         initComponents();
         this.logica = logica;
+        this.main = main;
         setModeloTabla();
+        addVariosSocios();
         jComboBoxOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Edad", "Cuota" }));
     }
     
@@ -215,7 +218,8 @@ public class Socios extends javax.swing.JFrame {
         if (selectedRow != -1) {
             Socio socio = logica.getSocios().get(selectedRow);
 
-            AddSocio addSocioDialog = new AddSocio(this, true);
+            AddSocio addSocioDialog = new AddSocio(this, true, logica);
+            addSocioDialog.tabla(socio);
             addSocioDialog.setModificar(true);
             addSocioDialog.setSocioModificar(socio);
             addSocioDialog.setVisible(true);
@@ -239,7 +243,8 @@ public class Socios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeleteSocioActionPerformed
 
     private void jButtonAddSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSocioActionPerformed
-        AddSocio socio = new AddSocio(this, true);
+        AddSocio socio = new AddSocio(this, true, logica);
+        //socio.tabla();
         socio.setModificar(false);
         socio.setVisible(true);
     }//GEN-LAST:event_jButtonAddSocioActionPerformed
@@ -286,12 +291,10 @@ public class Socios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
-        Deportes deportes = new Deportes(logica);
-        deportes.setVisible(true);
+        main.irDeportes();
 
         this.dispose();
     }//GEN-LAST:event_jButtonDeportesActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddSocio;

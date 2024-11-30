@@ -14,8 +14,8 @@ public class Main extends javax.swing.JFrame {
   
     private logicaNegocioSocio logica = new logicaNegocioSocio();
     
-    private Socios socios = new Socios(logica);
-    private Deportes deportes = new Deportes(logica);
+    private Socios socios = new Socios(logica, this);
+    private Deportes deportes = new Deportes(logica, this);
     
    
     /**
@@ -126,17 +126,17 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void irSocios() {
-        socios.addVariosSocios();
         socios.setVisible(true);
     } 
     
     public void irDeportes() {
-        deportes.addVariosDeportes();
         deportes.setVisible(true);
     }
     
     private void jButtonDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeportesActionPerformed
         irDeportes();
+        
+        this.dispose();
     }//GEN-LAST:event_jButtonDeportesActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -145,6 +145,8 @@ public class Main extends javax.swing.JFrame {
 
     private void jButtonSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSociosActionPerformed
         irSocios();
+        
+        this.dispose();
     }//GEN-LAST:event_jButtonSociosActionPerformed
 
     /**

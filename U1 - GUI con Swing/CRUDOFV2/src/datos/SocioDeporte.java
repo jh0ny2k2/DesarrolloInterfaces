@@ -11,15 +11,19 @@ package datos;
 public class SocioDeporte {
     
     private String idSocio;
-    private String idDeporte;
-    private int nivel;
+    private String nombreSocio;
+    private String codigoDeporte;
+    private String descripcionDeporte;
 
-    public SocioDeporte(String idSocio, String idDeporte, int nivel) {
+    // Constructor
+    public SocioDeporte(String idSocio, String nombreSocio, String codigoDeporte, String descripcionDeporte) {
         this.idSocio = idSocio;
-        this.idDeporte = idDeporte;
-        this.nivel = nivel;
+        this.nombreSocio = nombreSocio;
+        this.codigoDeporte = codigoDeporte;
+        this.descripcionDeporte = descripcionDeporte;
     }
 
+    // Getters y Setters
     public String getIdSocio() {
         return idSocio;
     }
@@ -28,20 +32,28 @@ public class SocioDeporte {
         this.idSocio = idSocio;
     }
 
-    public String getIdDeporte() {
-        return idDeporte;
+    public String getNombreSocio() {
+        return nombreSocio;
     }
 
-    public void setIdDeporte(String idDeporte) {
-        this.idDeporte = idDeporte;
+    public void setNombreSocio(String nombreSocio) {
+        this.nombreSocio = nombreSocio;
     }
 
-    public int getNivel() {
-        return nivel;
+    public String getCodigoDeporte() {
+        return codigoDeporte;
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
+    public void setCodigoDeporte(String codigoDeporte) {
+        this.codigoDeporte = codigoDeporte;
+    }
+
+    public String getDescripcionDeporte() {
+        return descripcionDeporte;
+    }
+
+    public void setDescripcionDeporte(String descripcionDeporte) {
+        this.descripcionDeporte = descripcionDeporte;
     }
     
 }

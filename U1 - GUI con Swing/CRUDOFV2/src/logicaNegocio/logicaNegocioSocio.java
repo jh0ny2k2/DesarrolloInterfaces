@@ -9,6 +9,7 @@ import datos.Socio;
 import datos.SocioDeporte;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -51,6 +52,8 @@ public class logicaNegocioSocio {
         return socios;
     }
 
+    
+    // LOGICA NEGOCIO DEPORTE
     public void addDeporte(Deporte deporte) {
         deportes.add(deporte);
     }
@@ -62,4 +65,36 @@ public class logicaNegocioSocio {
     public ArrayList<Deporte> getDeportes() {
         return deportes;
     }
+    
+    
+    
+    
+    
+    // LOGICA NEGOCIO SOCIO-DEPORTES
+    public void addDeporteASocio(String idSocio, String codigoDeporte) {
+        // Busca el socio y el deporte
+        Socio socio = socios.stream().filter(s -> s.getId().equals(String.valueOf(idSocio))).findFirst().orElse(null);
+        Deporte deporte = deportes.stream().filter(d -> d.getCodigo().equals(String.valueOf(codigoDeporte))).findFirst().orElse(null);
+
+        if (socio != null && deporte != null) {
+            deportesSocios.add(new SocioDeporte(idSocio, socio.getNombre(), codigoDeporte, deporte.getDescripcion()));
+        } else {
+            throw new IllegalArgumentException("Socio o Deporte no encontrados");
+        }
+    }
+
+    public void removeDeporteDeSocio(String idSocio, String idDeporte) {
+        deportesSocios.removeIf(sd -> sd.getIdSocio() == idSocio && sd.getCodigoDeporte() == idDeporte);
+    }
+
+    public ArrayList<SocioDeporte> getDeportesDeSocio(String idSocio) {
+        return (ArrayList<SocioDeporte>) deportesSocios.stream()
+                .filter(sd -> sd.getIdSocio() == idSocio)
+                .collect(Collectors.toList());
+    }
+
+    public ArrayList<SocioDeporte> getTodosDeportesSocios() {
+        return deportesSocios;
+    }
+
 }

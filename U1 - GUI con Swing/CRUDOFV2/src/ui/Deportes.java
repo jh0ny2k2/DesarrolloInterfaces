@@ -7,6 +7,7 @@ package ui;
 import datos.Deporte;
 import gui.tablemodels.DeporteTableModel;
 import gui.tablemodels.SocioTableModel;
+import javax.swing.JOptionPane;
 import logicaNegocio.logicaNegocioSocio;
 /**
  *
@@ -15,14 +16,17 @@ import logicaNegocio.logicaNegocioSocio;
 public class Deportes extends javax.swing.JFrame {
 
     private logicaNegocioSocio logica;
+    private Main main;
     
     /**
      * Creates new form Deportes
      */
-    public Deportes(logicaNegocioSocio logica) {
+    public Deportes(logicaNegocioSocio logica, Main main) {
         initComponents();
         this.logica = logica;
+        this.main = main;
         setModeloTabla();
+        addVariosDeportes();
     }
     
     public void setModeloTabla() {
@@ -32,10 +36,10 @@ public class Deportes extends javax.swing.JFrame {
     }
     
     public void addVariosDeportes () {
-        Deporte socio1 = new Deporte("1", "jhony", 22);
-        Deporte socio2 = new Deporte("2", "jhony", 22);
-        Deporte socio3 = new Deporte("3", "jhony", 22);
-        Deporte socio4 = new Deporte("4", "jhony", 22);
+        Deporte socio1 = new Deporte("1", "deporte 1", 4);
+        Deporte socio2 = new Deporte("2", "deporte 2", 3);
+        Deporte socio3 = new Deporte("3", "deporte 3", 2);
+        Deporte socio4 = new Deporte("4", "deporte 4", 1);
 
         
         logica.addDeporte(socio4);
@@ -46,7 +50,7 @@ public class Deportes extends javax.swing.JFrame {
         setModeloTabla();
     }
 
-    public void addSocio(Deporte d) {
+    public void addDeporte(Deporte d) {
         logica.addDeporte(d);
         setModeloTabla();
     }
@@ -157,36 +161,42 @@ public class Deportes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSocioActionPerformed
-        AddDeporte deporte = new AddDeporte(this, true);
+        addDeporte deporte = new addDeporte(this, true);
         deporte.setModificar(false);
         deporte.setVisible(true);
     }//GEN-LAST:event_jButtonAddSocioActionPerformed
 
     private void jButtonModificarSocio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocio1ActionPerformed
-        Socios socios = new Socios(logica);
-        socios.setVisible(true);
+        main.irSocios();
 
         this.dispose();
     }//GEN-LAST:event_jButtonModificarSocio1ActionPerformed
 
     private void jButtonModificarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarSocioActionPerformed
         int fila = jTableDeportes.getSelectedRow();
-
-        Deporte deporteSeleccionado = logicaApp.obtenerDeportes().get(fila);
-
-        AddDeporte deporteDialog = new AddDeporte(this, true);
-        deporteDialog.setModificar(true);
-        deporteDialog.setTextDeportes(deporteSeleccionado);
-        deporteDialog.setVisible(true);
-
+    
+        Deporte deporteSeleccionado = logica.getDeportes().get(fila);
+        if (fila != -1) {
+            addDeporte deporte = new addDeporte(this, true);
+            deporte.setModificar(false);
+            deporte.setTextDeportes(deporteSeleccionado);
+            deporte.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un deporte para modificar.");
+        }
+        
     }//GEN-LAST:event_jButtonModificarSocioActionPerformed
 
     private void jButtonDeleteSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSocioActionPerformed
-        int fila = jTableDeportes.getSelectedRow();
+        int selectedRow = jTableDeportes.getSelectedRow();
 
-        Deporte deporte = logicaApp.obtenerDeportes().get(fila);
-
-        logicaApp.obtenerDeportes().remove(deporte);
+        if (selectedRow != -1) {
+            Deporte socio = logica.getDeportes().get(selectedRow);
+            logica.getDeportes().remove(socio);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un socio para eliminar.");
+        }
+        
 
         setModeloTabla();
     }//GEN-LAST:event_jButtonDeleteSocioActionPerformed
